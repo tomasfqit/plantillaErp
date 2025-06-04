@@ -1,16 +1,15 @@
 //"use client";
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useLogin } from '../services/auth/useLogin';
-import { useAuthProvider } from './useAuth';
+import { useAuthProvider } from './AuthContext';
 import { toast } from 'sonner';
 import { TOAST_SUCCESS } from '@/constants';
-import { Car } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
+	const navigate = useNavigate();
 	const { mutate: login } = useLogin();
 	const { login: localLogin } = useAuthProvider();
-	const navigate = useNavigate();
 	const [formData, setFormData] = useState({
 		username: '',
 		password: ''
@@ -27,10 +26,17 @@ const Login = () => {
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault();
 		login(formData, {
-			onSuccess: () => {
+			onSuccess: (data) => {
 				toast.success('Inicio de sesión exitoso', {
 					style: TOAST_SUCCESS
 				});
+				localLogin(
+					{
+						token: data.result,
+						username: formData.username
+					}
+				);
+				navigate('/home', { replace: true });
 			},
 		});
 

@@ -10,13 +10,22 @@ interface AppRouterProps {
 export default function AppRouter({ isAuthenticated }: AppRouterProps) {
 	return (
 		<Routes>
-			<Route path="/login" element={<Login />} />
+			{/* Redirige si ya está autenticado */}
+			<Route
+				path="/login"
+				element={
+					isAuthenticated ? <Navigate to="/home" replace /> : <Login />
+				}
+			/>
 
 			{isAuthenticated ? (
 				<Route element={<MainLayout />}>
-					<Route path="/" element={<Home />} />
+					<Route path="/" element={<Navigate to="/home" replace />} />
+					<Route path="/home" element={<Home />} />
+					{/* Podrías agregar más rutas privadas aquí */}
 				</Route>
 			) : (
+				// Redirige cualquier ruta no autorizada al login
 				<Route path="*" element={<Navigate to="/login" replace />} />
 			)}
 		</Routes>
