@@ -1,10 +1,10 @@
 //"use client";
+import { TOAST_SUCCESS } from '@/constants';
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'sonner';
 import { useLogin } from '../services/auth/useLogin';
 import { useAuthProvider } from './AuthContext';
-import { toast } from 'sonner';
-import { TOAST_SUCCESS } from '@/constants';
-import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
 	const navigate = useNavigate();
@@ -46,9 +46,9 @@ const Login = () => {
 		<div className="min-h-screen flex flex-col md:flex-row bg-white">
 			{/* Left side - branding */}
 			<div className="w-full md:w-1/2 bg-black flex flex-col justify-center items-center p-8 text-white">
-				<div className="mb-6 relative h-72 w-80">
+				<div className="mb-6 relative h-[90%] w-[80%]">
 					<img
-						src="/itsa.png"
+						src="/logo_fondo_trans_blanco.png"
 						alt="Importadora Tomebamba Logo"
 						className="object-contain w-full h-full"
 					/>

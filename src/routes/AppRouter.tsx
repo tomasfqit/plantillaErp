@@ -1,7 +1,7 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 import Login from '../auth/Login';
+import { MENU_ITEMS } from '../constants/MenuITems';
 import MainLayout from '../layouts/MainLayout';
-import Home from '../pages/home/home';
 
 interface AppRouterProps {
 	isAuthenticated: boolean;
@@ -20,8 +20,9 @@ export default function AppRouter({ isAuthenticated }: AppRouterProps) {
 
 			{isAuthenticated ? (
 				<Route element={<MainLayout />}>
-					<Route path="/" element={<Navigate to="/home" replace />} />
-					<Route path="/home" element={<Home />} />
+					{MENU_ITEMS.map((item) => (
+						<Route key={item.name} path={item.href} element={item.component} />
+					))}
 				</Route>
 			) : (
 				// Redirige cualquier ruta no autorizada al login
