@@ -1,6 +1,6 @@
 import { ChevronDown, ChevronRight, LogOut } from "lucide-react";
 import { useState } from "react";
-import { Outlet, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useAuthProvider } from "../../auth/AuthContext";
 import { MENU_ITEMS } from "../../constants/MenuITems";
 import { useSidebar } from "../../context/SidebarContext";
@@ -29,7 +29,7 @@ export const Sidebar = () => {
 		navigate("/login");
 	}
 
-	const handleClickItemMenu = (href: string) => {
+	const handleClickItemMenu = (href?: string) => {
 		if (href) {
 			toggleSidebar();
 			navigate(href);
@@ -65,7 +65,6 @@ export const Sidebar = () => {
 									{item.href ? (
 										// Elemento de primer nivel con href (sin submenús)
 										<a
-											href={item.href}
 											className="flex items-center px-3 py-1 text-sm font-medium text-gray-700 rounded-lg hover:bg-gray-100 hover:text-gray-900 transition-colors duration-200 group"
 											onClick={() => handleClickItemMenu(item.href)}
 										>
@@ -96,7 +95,6 @@ export const Sidebar = () => {
 														const ChildIcon = child.icon;
 														return (
 															<a
-																key={child.name}
 																href={child.href}
 																className="flex items-center px-3 py-1 text-sm font-medium text-gray-600 rounded-lg hover:bg-gray-100 hover:text-gray-900 transition-colors duration-200 group"
 																onClick={() => handleClickItemMenu(child.href)}
@@ -128,11 +126,6 @@ export const Sidebar = () => {
 					</div>
 				</div>
 			</aside>
-
-			{/* Main content */}
-			<main className="flex-1 transition-all duration-300 min-h-full">
-				<Outlet />
-			</main>
 			{openModalConfirmarAccion &&
 				<ModalConfirmarAccion
 					title="Cerrar sesión"
