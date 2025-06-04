@@ -22,7 +22,6 @@ export default function AppRouter({ isAuthenticated }: AppRouterProps) {
 				<Route element={<MainLayout />}>
 					<Route path="/" element={<Navigate to="/home" replace />} />
 					<Route path="/home" element={<Home />} />
-					{/* Podrías agregar más rutas privadas aquí */}
 				</Route>
 			) : (
 				// Redirige cualquier ruta no autorizada al login

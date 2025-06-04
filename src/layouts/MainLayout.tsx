@@ -1,14 +1,10 @@
-import { Outlet } from 'react-router-dom';
-
+import { Header } from '@/components/MainLayout/Header';
+import { Sidebar } from '@/components/MainLayout/Sidebar';
 const MainLayout = () => {
 	return (
 		<div>
-			<header>
-				header
-			</header>
-			<main>
-				<Outlet />
-			</main>
+			<Header />
+			<Sidebar />
 		</div>
 	);
 };
