@@ -1,7 +1,10 @@
-import { useState } from 'react';
+//"use client";
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLogin } from '../services/auth/useLogin';
 import { useAuthProvider } from './useAuth';
+import { toast } from 'sonner';
+import { TOAST_ERROR, TOAST_SUCCESS } from '@/constants';
 
 const Login = () => {
 	const { mutate: login } = useLogin();
@@ -24,10 +27,10 @@ const Login = () => {
 		e.preventDefault();
 		login(formData, {
 			onSuccess: () => {
-				localLogin(() => {
-					navigate('/home');
+				toast.success('Inicio de sesión exitoso', {
+					style: TOAST_SUCCESS
 				});
-			}
+			},
 		});
 
 	};
@@ -35,9 +38,7 @@ const Login = () => {
 	return (
 		<div className="min-h-screen flex items-center justify-center bg-gray-50">
 			<div className="max-w-md w-full space-y-8 p-8 bg-white rounded-lg shadow">
-				<h2 className="text-center text-3xl font-bold text-gray-900">
-					Sign in to your account
-				</h2>
+				<h1 className="text-3xl font-bold text-gray-900 mb-2">Importadora Tomebamba</h1>
 				<form className="mt-8 space-y-6" onSubmit={handleSubmit}>
 					<div className="rounded-md shadow-sm space-y-4">
 						<div>

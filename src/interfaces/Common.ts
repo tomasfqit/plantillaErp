@@ -2,11 +2,6 @@ import { AxiosError } from "axios";
 
 export type ErrorType = {
   message: string;
-  statusCode: number;
+  code: number;
 };
 export type AxiosErrorType = AxiosError<ErrorType>;
-
-export type MenuItem = {
-  etiqueta: string;
-  url: string;
-};

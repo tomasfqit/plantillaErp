@@ -1,5 +1,5 @@
 import axios from "axios";
-const server = "";//process.env.NEXT_PUBLIC_API || "http://localhost:3000";
+const server = import.meta.env.VITE_API_SERVICE || 'http://localhost:3000';
 const defaultOptions = {
   baseURL: server,
   headers: {

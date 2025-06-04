@@ -3,7 +3,7 @@ import { post } from "./config";
 
 export const authApi = {
 	login: async (request: ILoginRequest) => {
-		const response = await post<ILoginResponse>('/auth/login', request);
+		const response = await post<ILoginResponse>('/security/login/', request);
 		return response.data;
 	}
 };
