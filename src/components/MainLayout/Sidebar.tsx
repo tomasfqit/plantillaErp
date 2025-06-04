@@ -5,6 +5,7 @@ import { useAuthProvider } from "../../auth/AuthContext";
 import { MENU_ITEMS } from "../../constants/MenuITems";
 import { useSidebar } from "../../context/SidebarContext";
 import { ModalConfirmarAccion } from "../Modals/ConfirmarAccion";
+import { IMenuItems } from "@/interfaces/IMenuITems";
 
 export const Sidebar = () => {
 	const navigate = useNavigate()
@@ -29,10 +30,16 @@ export const Sidebar = () => {
 		navigate("/login");
 	}
 
-	const handleClickItemMenu = (href?: string) => {
-		if (href) {
+	const handleClickItemMenu = (child: IMenuItems, pathPadre?: string) => {
+		if (child.path && pathPadre) {
+			const path = pathPadre + "/" + child.path;
 			toggleSidebar();
-			navigate(href);
+			navigate(path);
+		}
+		if (child.path && !pathPadre) {
+			const path = child.path;
+			toggleSidebar();
+			navigate(path);
 		}
 	}
 
@@ -62,11 +69,11 @@ export const Sidebar = () => {
 
 							return (
 								<div key={item.name}>
-									{item.href ? (
+									{!item.children ? (
 										// Elemento de primer nivel con href (sin submenús)
 										<a
 											className="flex items-center px-3 py-1 text-sm font-medium text-gray-700 rounded-lg hover:bg-gray-100 hover:text-gray-900 transition-colors duration-200 group"
-											onClick={() => handleClickItemMenu(item.href)}
+											onClick={() => handleClickItemMenu(item)}
 										>
 											<Icon className="w-4 h-4 mr-3 text-gray-500 group-hover:text-gray-700" />
 											{item.name}
@@ -95,9 +102,8 @@ export const Sidebar = () => {
 														const ChildIcon = child.icon;
 														return (
 															<a
-																href={child.href}
 																className="flex items-center px-3 py-1 text-sm font-medium text-gray-600 rounded-lg hover:bg-gray-100 hover:text-gray-900 transition-colors duration-200 group"
-																onClick={() => handleClickItemMenu(child.href)}
+																onClick={() => handleClickItemMenu(child, item.path)}
 															>
 																<ChildIcon className="w-3 h-3 mr-3 text-gray-500 group-hover:text-gray-700" />
 																{child.name}

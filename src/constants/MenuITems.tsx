@@ -10,16 +10,17 @@ import { IMenuItems } from "@/interfaces/IMenuITems";
 export const MENU_ITEMS: IMenuItems[] = [
 	{
 		name: 'Inicio',
-		href: '/home',
+		path: 'home',
 		icon: Home,
 		component: HomePage,
 	},
 	{
 		name: 'Comercialización',
+		path: 'comercializacion',
 		icon: DollarSign,
 		children: [
-			{ name: 'Caja', href: '/comercializacion/caja', icon: Box, component: Caja },
-			{ name: 'Ventas', href: '/comercializacion/facturacion', icon: DollarSign, component: Facturacion },
+			{ name: 'Caja', path: 'caja', icon: Box, component: Caja },
+			{ name: 'Ventas', path: 'facturacion', icon: DollarSign, component: Facturacion },
 		]
 	}
 ];
