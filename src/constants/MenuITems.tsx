@@ -20,7 +20,7 @@ export const MENU_ITEMS: IMenuItems[] = [
 		icon: DollarSign,
 		children: [
 			{ name: 'Caja', path: 'caja', icon: Box, component: Caja },
-			{ name: 'Ventas', path: 'facturacion', icon: DollarSign, component: Facturacion },
+			{ name: 'Facturación', path: 'facturacion', icon: DollarSign, component: Facturacion },
 		]
 	}
 ];

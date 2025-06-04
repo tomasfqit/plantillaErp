@@ -1,6 +1,6 @@
 import { ChevronDown, ChevronRight, LogOut } from "lucide-react";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { useAuthProvider } from "../../auth/AuthContext";
 import { MENU_ITEMS } from "../../constants/MenuITems";
 import { useSidebar } from "../../context/SidebarContext";
@@ -44,7 +44,7 @@ export const Sidebar = () => {
 	}
 
 	return (
-		<div className="flex h-screen pt-16">
+		<div className="h-screen pt-16 w-64 " hidden={!sidebarOpen}>
 			{/* Mobile sidebar overlay */}
 			{sidebarOpen && (
 				<div className="fixed inset-0 z-20 bg-black bg-opacity-50 lg:hidden" onClick={toggleSidebar} />
@@ -52,8 +52,8 @@ export const Sidebar = () => {
 
 			{/* Sidebar */}
 			<aside
-				className={`fixed top-0 left-0 z-30 h-full w-64 bg-white shadow-lg transform transition-transform duration-300 ease-in-out lg:static ${sidebarOpen ? "translate-x-0 lg:w-64" : "-translate-x-full lg:w-0"
-					}`} hidden={!sidebarOpen}
+				className={`fixed top-0 left-0 z-30 h-full bg-white shadow-lg transform transition-transform duration-300 ease-in-out lg:static ${sidebarOpen ? "translate-x-0 lg:w-64" : "-translate-x-full lg:w-0"
+					}`}
 			>
 				<div className="flex flex-col h-full w-64">
 					{/* Logo/Brand */}
@@ -102,6 +102,7 @@ export const Sidebar = () => {
 														const ChildIcon = child.icon;
 														return (
 															<a
+																key={child.name}
 																className="flex items-center px-3 py-1 text-sm font-medium text-gray-600 rounded-lg hover:bg-gray-100 hover:text-gray-900 transition-colors duration-200 group"
 																onClick={() => handleClickItemMenu(child, item.path)}
 															>
@@ -132,6 +133,9 @@ export const Sidebar = () => {
 					</div>
 				</div>
 			</aside>
+			{/* <main className="flex-1 transition-all duration-300 h-screen w-screen">
+				<Outlet />
+			</main> */}
 			{openModalConfirmarAccion &&
 				<ModalConfirmarAccion
 					title="Cerrar sesión"

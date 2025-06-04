@@ -4,7 +4,7 @@ export interface IMenuItems {
     name: string;
     path?: string;
     icon: any;
-    component?: () => React.ReactNode;
+    component?: React.FC<any>;
     children?: IMenuItems[];
 }
 
